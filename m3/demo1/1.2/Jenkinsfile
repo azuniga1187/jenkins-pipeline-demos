@@ -8,16 +8,7 @@ pipeline {
         VERSION_RC = "rc.2"
     }
     stages {
-        stage('Audit tools') {                        
-            steps {
-                sh '''
-                  git version
-
-                  dotnet --list-sdks
-                  dotnet --list-runtimes
-                '''
-            }
-        }
+       
         stage('Build') {
             environment {
                 VERSION_SUFFIX = "${sh(script:'if [ "${RC}" == "false" ] ; then echo -n "${VERSION_RC}+ci.${BUILD_NUMBER}"; else echo -n "${VERSION_RC}"; fi', returnStdout: true)}"
